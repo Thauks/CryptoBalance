@@ -49,7 +49,12 @@ def telegram_handler(update, context):
         last, avg = get_balance(CbClient, BnClient)
         update.message.reply_text(f'Current Balance: {last}')
         print(context.args)
-        time.sleep(2)
+        seconds = 1800
+        try:
+            seconds = int(context.args[0])
+        except:
+            pass
+        time.sleep(seconds)
 
 
 def stopper(update, context):
