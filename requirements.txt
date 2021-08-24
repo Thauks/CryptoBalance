@@ -1,3 +1,4 @@
 PyYAML~=5.4.1
 coinbase~=2.1.0
 binance~=0.3
+python-telegram-bot~=13.7

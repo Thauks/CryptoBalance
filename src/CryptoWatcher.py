@@ -3,7 +3,6 @@ import sys
 import time
 
 import yaml
-from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext, run_async
 from coinbase.wallet.client import Client as CoinbaseClient
 from binance.client import Client as BinanceClient
