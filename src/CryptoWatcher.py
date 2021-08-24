@@ -1,13 +1,17 @@
 import os
-import sys
 import time
 
 import yaml
 from telegram.ext import Updater, CommandHandler, CallbackContext, run_async
 from coinbase.wallet.client import Client as CoinbaseClient
 from binance.client import Client as BinanceClient
+from boto.s3.connection import S3Connection
 
 # Declaring config and the necessary clients to make the requests
+
+s3 = S3Connection(os.environ['CB_API_KEY'], os.environ['CB_API_SECRET'])
+
+print(CB_API_KEY)
 
 with open('../config/config.yml') as cnf:
     config = yaml.load(cnf, Loader=yaml.FullLoader)
