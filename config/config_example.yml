@@ -1,0 +1,11 @@
+  # Insert your API keys here
+  # Coinbase API
+  CB_API_KEY: ''
+  CB_API_SECRET: ''
+
+  # Binance API
+  BN_API_KEY: ''
+  BN_API_SECRET: ''
+
+  # Telegram API
+  BOT_API_KEY: ''
