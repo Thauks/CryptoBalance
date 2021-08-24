@@ -9,15 +9,19 @@ from boto.s3.connection import S3Connection
 
 # Declaring config and the necessary clients to make the requests
 
-s3 = S3Connection(os.environ['CB_API_KEY'], os.environ['CB_API_SECRET'])
+print(os.environ['CB_API_KEY'])
+try:
+    with open('../config/config.yml') as cnf:
+        config = yaml.load(cnf, Loader=yaml.FullLoader)
 
-print(CB_API_KEY)
+    CbClient = CoinbaseClient(api_key=config['CB_API_KEY'], api_secret=config['CB_API_SECRET'])
+    BnClient = BinanceClient(api_key=config['BN_API_KEY'], api_secret=config['CB_API_SECRET'])
+    updater = Updater(config['BOT_API_KEY'])
 
-with open('../config/config.yml') as cnf:
-    config = yaml.load(cnf, Loader=yaml.FullLoader)
-
-CbClient = CoinbaseClient(api_key=config['CB_API_KEY'], api_secret=config['CB_API_SECRET'])
-BnClient = BinanceClient(api_key=config['BN_API_KEY'], api_secret=config['CB_API_SECRET'])
+except:
+    CbClient = CoinbaseClient(api_key=os.environ['CB_API_KEY'], api_secret=os.environ['CB_API_SECRET'])
+    BnClient = BinanceClient(api_key=os.environ['BN_API_KEY'], api_secret=os.environ['CB_API_SECRET'])
+    updater = Updater(os.environ['BOT_API_KEY'])
 
 
 # Declaring the functions needed by the logic
@@ -66,8 +70,6 @@ def stopper(update, context):
 
 
 # Running the bot
-
-updater = Updater(config['BOT_API_KEY'])
 
 updater.dispatcher.add_handler(CommandHandler('start', telegram_handler, run_async=True))
 updater.dispatcher.add_handler(CommandHandler('stop', stopper, run_async=True))
